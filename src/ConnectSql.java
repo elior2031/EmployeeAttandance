@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;*/
 
-import java.awt.Frame;
+import java.awt.*;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.text.StyledEditorKit.BoldAction;
