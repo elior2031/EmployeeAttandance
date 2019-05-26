@@ -1,0 +1,115 @@
+
+
+import java.awt.EventQueue;
+import java.awt.Window;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class EnterUser extends FrameClock{
+
+	//private JFrame frame;
+	JButton btnExit;
+	JButton btnEnter;
+	JButton btnManage;
+	JButton btnBack;
+	Login login;
+	Data d;
+	
+	private ConnectSql conector = null;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					EnterUser window = new EnterUser();
+					//window.frame.setVisible(true);
+					new EnterUser();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 * @wbp.parser.entryPoint
+	 */
+	public EnterUser() {
+		super.getFrame().setVisible(true);
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		/*frame = new JFrame();
+		frame.setBounds(270, 60, 1400, 900);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);*/
+		
+		conector = new ConnectSql();
+		
+		
+		btnExit = new JButton("יציאה");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				conector = new ConnectSql();
+				if(conector.EnterExit(2)==true)
+					JOptionPane.showMessageDialog(frame,"בוצע יציאה");
+				else
+					JOptionPane.showMessageDialog(frame,"לא בוצע יציאה");	
+			}
+		});
+		btnExit.setBounds(700, 100, 250, 100);
+		frame.getContentPane().add(btnExit);
+		
+		btnEnter = new JButton("כניסה");
+		btnEnter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				conector = new ConnectSql();
+				if(conector.EnterExit(1)==true)
+					JOptionPane.showMessageDialog(frame,"בוצע כניסה");
+				else
+					JOptionPane.showMessageDialog(frame,"לא בוצע כניסה");
+				
+			}
+		});
+		btnEnter.setBounds(1050, 100, 250, 100);
+		frame.getContentPane().add(btnEnter);
+		
+		btnManage = new JButton("ניהול נוכחות");
+		btnManage.setBounds(700, 270, 600, 100);
+		frame.getContentPane().add(btnManage);
+		
+		btnBack = new JButton("חזרה למסך ראשי");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			//	login = /*new Login();*/d.
+				//login.getFrame().setVisible(true);
+				d=new Data();
+				frame.setVisible(false);
+				frame = d.getFrameLast();
+				frame.setVisible(true);
+			}
+		});
+		btnBack.setBounds(100, 700, 300, 100);
+		frame.getContentPane().add(btnBack);
+	}
+
+	public JFrame getFrame() {
+		// TODO Auto-generated method stub
+		return frame;
+		
+	}
+}
