@@ -64,7 +64,7 @@ public class EnterSystem extends FrameClock {
 		frame.getContentPane().setLayout(null);
 		
 		btnAddUsers = new JButton("הוספת עובד חדש");
-		btnAddUsers.addActionListener(new ActionListener() {
+		btnAddUsers.addActionListener(new ActionListener() {//צריך לוודא שמה שקיבלנו תקין!!!
 			public void actionPerformed(ActionEvent e) {
 				con = new ConnectSql();
 				if(txtName.getText().contentEquals("")) 
@@ -82,13 +82,23 @@ public class EnterSystem extends FrameClock {
 				else if(txtBirthday.getText().contentEquals("")) 
 					JOptionPane.showMessageDialog(frame,"חסר תאריך לידה\n לא בוצע הקמת עובד", "שגיאה", 0);
 				
-				else if(con.AddNewUser(txtName.getText(), Pass.getText(), Integer.parseInt(txtAdmin.getText()), 
-						Integer.parseInt(txtPermission.getText()),txtAddress.getText(), txtPhone.getText(), 
-						txtBirthday.getText())== true)
-					JOptionPane.showMessageDialog(frame,"בוצע הקמת עובד חדש");
-				else
-					JOptionPane.showMessageDialog(frame,"לא בוצע הקמת עובד חדש");
+				else{
+						int ret = con.AddNewUser(txtName.getText(), Pass.getText(), Integer.parseInt(txtAdmin.getText()),
+								Integer.parseInt(txtPermission.getText()),txtAddress.getText(), txtPhone.getText(),txtBirthday.getText()); 
+						if(ret >-1){
+							if(Integer.parseInt(txtPermission.getText())==1)
+									JOptionPane.showMessageDialog(frame,"בוצע הקמת עובד מס'"+ret+" סיסמא:"+Pass.getText()+" הרשאת יוזר");
+							else if(Integer.parseInt(txtPermission.getText())==2)
+									JOptionPane.showMessageDialog(frame,"בוצע הקמת עובד מס'"+ret+" סיסמא:"+Pass.getText()+" הרשאת מנהל");
+								else
+									JOptionPane.showMessageDialog(frame,"בוצע הקמת עובד מס'"+ret+" סיסמא:"+Pass.getText()+" הרשאת HR");
+						}
+							
+						else
+							JOptionPane.showMessageDialog(frame,"לא בוצע הקמת עובד חדש");
+				}
 			}
+				
 		});
 		btnAddUsers.setBounds(627, 541, 600, 100);
 		frame.getContentPane().add(btnAddUsers);

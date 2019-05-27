@@ -107,7 +107,7 @@ public class ConnectSql {
 	}
 
 
-	public boolean AddNewUser(String Name,String Password, int manager, int permission , String Address, String Phone ,String  Birthday) {
+	public int AddNewUser(String Name,String Password, int manager, int permission , String Address, String Phone ,String  Birthday) {
 		d = new Data();
 		try {
 			Statement stmt = Connect();
@@ -127,14 +127,14 @@ public class ConnectSql {
 					"INSERT INTO Employee VALUES ("+max+" , \""+ Name + "\" , \"" + Password + "\" , " + manager + " , " 
 							+permission+ " , \""+Address+"\" , \""+Phone+"\" , \""+Birthday+"\")");
 			stmt.close();
-			return true;
+			return max;
 
 		} catch (SQLException e) {
 			// TODO Auto-generated
 			e.printStackTrace();
 		}
 		System.out.println("X");
-		return false;
+		return -1;
 		}
 	
 
