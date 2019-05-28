@@ -21,6 +21,7 @@ public class EnterUser extends FrameClock{
 	Login login;
 	Data d;
 	
+	
 	private ConnectSql conector = null;
 
 	/**
@@ -47,7 +48,6 @@ public class EnterUser extends FrameClock{
 		frame.getContentPane().setLayout(null);*/
 		
 		conector = new ConnectSql();
-		
 		
 		btnExit = new JButton("יציאה");
 		btnExit.addActionListener(new ActionListener() {
