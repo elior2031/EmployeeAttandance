@@ -118,13 +118,15 @@ public class Login extends FrameClock {
 
 		txtEmp.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyTyped(KeyEvent e) {
 
-				if (e.getKeyCode() == KeyEvent.VK_ENTER)
-					txtPass.requestFocus();
-				if((e.getKeyChar() >= 'A' && e.getKeyChar() <= 'Z' )||(e.getKeyChar() >= 'a' && e.getKeyChar() <= 'z' )||
-						(e.getKeyChar() >= 'א' && e.getKeyChar() <= 'ת' ))
-					JOptionPane.showMessageDialog(frame,"הזנת מס' עובד לא תקין נא נסה שנית", "שגיאה", 2);// 0-X 1-!
+				char c=e.getKeyChar();
+				if(!(Character.isDigit(c) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE )|| c== KeyEvent.VK_ENTER)
+					if (c== KeyEvent.VK_ENTER)
+						txtPass.requestFocus();
+					else
+						e.consume();
+				
 			}
 
 		});
@@ -182,9 +184,12 @@ public class Login extends FrameClock {
 	
 	void processEnterButton() {
 		System.out.println("clicked");
+		
 		d=new Data();
 		d.setID(Integer.parseInt(txtEmp.getText()));
 		d.setPass(txtPass.getText());
+		txtPass.setText(null);
+		
 		
 		conector = new ConnectSql();
 		

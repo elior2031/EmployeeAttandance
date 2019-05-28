@@ -13,7 +13,7 @@ import java.awt.event.ActionEvent;
 
 public class EnterUser extends FrameClock{
 
-	//private JFrame frame;
+//	private JFrame frame;
 	JButton btnExit;
 	JButton btnEnter;
 	JButton btnManage;
@@ -26,19 +26,7 @@ public class EnterUser extends FrameClock{
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EnterUser window = new EnterUser();
-					//window.frame.setVisible(true);
-					new EnterUser();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
+	
 
 	/**
 	 * Create the application.
@@ -68,7 +56,7 @@ public class EnterUser extends FrameClock{
 				if(conector.EnterExit(2)==true)
 					JOptionPane.showMessageDialog(frame,"בוצע יציאה");
 				else
-					JOptionPane.showMessageDialog(frame,"לא בוצע יציאה");	
+					JOptionPane.showMessageDialog(frame,"לא בוצע יציאה משום שיש כבר יציאה היום ללא כניסה");	
 			}
 		});
 		btnExit.setBounds(700, 100, 250, 100);
@@ -81,7 +69,7 @@ public class EnterUser extends FrameClock{
 				if(conector.EnterExit(1)==true)
 					JOptionPane.showMessageDialog(frame,"בוצע כניסה");
 				else
-					JOptionPane.showMessageDialog(frame,"לא בוצע כניסה");
+					JOptionPane.showMessageDialog(frame,"לא בוצע כניסה משום שיש כבר כניסה היום במערכת ללא יציאה");
 				
 			}
 		});
@@ -90,6 +78,14 @@ public class EnterUser extends FrameClock{
 		
 		btnManage = new JButton("ניהול נוכחות");
 		btnManage.setBounds(700, 270, 600, 100);
+		btnManage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				conector=new ConnectSql();
+				conector.createTimeForUser();
+				d=new Data();
+				d.getTimeForUser();
+			}
+		});
 		frame.getContentPane().add(btnManage);
 		
 		btnBack = new JButton("חזרה למסך ראשי");

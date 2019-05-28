@@ -14,6 +14,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class EnterSystem extends FrameClock {
 
@@ -30,22 +32,13 @@ public class EnterSystem extends FrameClock {
 	private JTextField txtBirthday;
 	private JLabel lblnote;
 	private JLabel lblnote_1;
+	private JButton btnBack;
+	private Data d;
 
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EnterSystem window = new EnterSystem();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
+
 
 	/**
 	 * Create the application.
@@ -58,7 +51,7 @@ public class EnterSystem extends FrameClock {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		//frame = new JFrame();
+	//	frame = new JFrame();
 		frame.setBounds(270, 60, 1400, 900);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -73,14 +66,20 @@ public class EnterSystem extends FrameClock {
 					JOptionPane.showMessageDialog(frame,"חסר סיסמא\n לא בוצע הקמת עובד", "שגיאה", 0);
 				else if(txtAdmin.getText().contentEquals("")) 
 					JOptionPane.showMessageDialog(frame,"חסר מנהל\n לא בוצע הקמת עובד", "שגיאה", 0);
+				else if(con.IsHaveUser(Integer.parseInt(txtAdmin.getText()))==false)
+					JOptionPane.showMessageDialog(frame,"לא קיים עובד כזה במערכת", "שגיאה", 0);
 				else if(txtPermission.getText().contentEquals("")) 
 					JOptionPane.showMessageDialog(frame,"חסר הרשאה\n לא בוצע הקמת עובד", "שגיאה", 0);
 				else if(txtAddress.getText().contentEquals("")) 
 					JOptionPane.showMessageDialog(frame,"חסר כתובת\n לא בוצע הקמת עובד", "שגיאה", 0);
 				else if(txtPhone.getText().contentEquals("")) 
 					JOptionPane.showMessageDialog(frame,"חסר טלפון\n לא בוצע הקמת עובד", "שגיאה", 0);
+				else if(txtPhone.getText().length()!=10)
+					JOptionPane.showMessageDialog(frame,"מס' טלפון לא תקין", "שגיאה", 0);
 				else if(txtBirthday.getText().contentEquals("")) 
 					JOptionPane.showMessageDialog(frame,"חסר תאריך לידה\n לא בוצע הקמת עובד", "שגיאה", 0);
+				else if(txtBirthday.getText().length()!=8)
+					JOptionPane.showMessageDialog(frame,"תאריך לידה לא לפי הפורמט", "שגיאה", 0);//
 				
 				else{
 						int ret = con.AddNewUser(txtName.getText(), Pass.getText(), Integer.parseInt(txtAdmin.getText()),
@@ -104,41 +103,122 @@ public class EnterSystem extends FrameClock {
 		frame.getContentPane().add(btnAddUsers);
 		
 		txtName = new JTextField();
+		txtName.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (e.getKeyChar()== KeyEvent.VK_ENTER)
+					Pass.requestFocus();
+			}
+
+		});
 		txtName.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtName.setBounds(529, 277, 127, 34);
 		frame.getContentPane().add(txtName);
 		txtName.setColumns(10);
 		
 		Pass = new JPasswordField();
+		Pass.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (e.getKeyChar()== KeyEvent.VK_ENTER)
+					txtAdmin.requestFocus();
+			}
+
+		});
 		Pass.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		Pass.setBounds(691, 277, 127, 34);
 		frame.getContentPane().add(Pass);
 		
 		txtAdmin = new JTextField();
+		txtAdmin.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+
+				char c=e.getKeyChar();
+				if(!(Character.isDigit(c) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE )|| c== KeyEvent.VK_ENTER)
+					if (c== KeyEvent.VK_ENTER)
+						txtPermission.requestFocus();
+					else
+						e.consume();
+				
+			}
+
+		});
 		txtAdmin.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtAdmin.setColumns(10);
 		txtAdmin.setBounds(854, 277, 127, 34);
 		frame.getContentPane().add(txtAdmin);
 		
 		txtPermission = new JTextField();
+		txtPermission.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+
+				if((e.getKeyChar()>KeyEvent.VK_0 && e.getKeyChar()<KeyEvent.VK_4)|| e.getKeyChar()== KeyEvent.VK_ENTER) {
+					if (e.getKeyChar() != KeyEvent.VK_ENTER)
+						txtAddress.requestFocus();
+					if(!txtPermission.getText().isEmpty())
+						txtPermission.setText(null);
+				}
+				else 
+					e.consume();
+				
+			}
+
+		});
 		txtPermission.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtPermission.setColumns(10);
 		txtPermission.setBounds(1021, 277, 127, 34);
 		frame.getContentPane().add(txtPermission);
 		
 		txtAddress = new JTextField();
+		txtAddress.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (e.getKeyChar()== KeyEvent.VK_ENTER)
+					txtPhone.requestFocus();
+			}
+		});
 		txtAddress.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtAddress.setColumns(10);
 		txtAddress.setBounds(1185, 277, 127, 34);
 		frame.getContentPane().add(txtAddress);
 		
 		txtPhone = new JTextField();
+		txtPhone.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+
+				char c=e.getKeyChar();
+				if(!(Character.isDigit(c) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE )|| c== KeyEvent.VK_ENTER)
+					if (c== KeyEvent.VK_ENTER)
+						txtBirthday.requestFocus();
+					else
+						e.consume();
+				
+			}
+
+		});
 		txtPhone.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtPhone.setColumns(10);
 		txtPhone.setBounds(691, 399, 127, 34);
 		frame.getContentPane().add(txtPhone);
 		
 		txtBirthday = new JTextField();
+		txtBirthday.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+
+				char c=e.getKeyChar();
+				if(!(Character.isDigit(c) || c==KeyEvent.VK_BACK_SPACE || c==KeyEvent.VK_DELETE )|| c== KeyEvent.VK_ENTER)
+					if (c== KeyEvent.VK_ENTER)
+						btnAddUsers.requestFocus();
+					else
+						e.consume();
+				
+			}
+
+		});
 		txtBirthday.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtBirthday.setColumns(10);
 		txtBirthday.setBounds(1021, 399, 127, 34);
@@ -188,5 +268,29 @@ public class EnterSystem extends FrameClock {
 		lblnote_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblnote_1.setBounds(1021, 156, 164, 34);
 		frame.getContentPane().add(lblnote_1);
+		
+		btnBack = new JButton("חזרה למסך ראשי");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			//	login = /*new Login();*/d.
+				//login.getFrame().setVisible(true);
+				d=new Data();
+				frame.setVisible(false);
+				frame = d.getFrameLast();
+				frame.setVisible(true);
+			}
+		});
+		btnBack.setBounds(100, 700, 300, 100);
+		frame.getContentPane().add(btnBack);
+		
+		JLabel lblBD = new JLabel("\u05E4\u05D5\u05E8\u05DE\u05D8 \u05DC\u05EA.\u05DC\u05D9\u05D3\u05D4:");
+		lblBD.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblBD.setBounds(1185, 377, 127, 34);
+		frame.getContentPane().add(lblBD);
+		
+		JLabel lblbd = new JLabel("ddmmyyyy");
+		lblbd.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblbd.setBounds(1195, 400, 83, 34);
+		frame.getContentPane().add(lblbd);
 	}
 }
