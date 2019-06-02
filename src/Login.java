@@ -69,7 +69,7 @@ import java.awt.Container;
 
 
 
-public class Login extends FrameClock {
+public class Login {
 
 	private JLabel lblEmp;
 	private JLabel lblPass;
@@ -78,32 +78,17 @@ public class Login extends FrameClock {
 	private JButton btnEnter;
 	private EnterUser EU=null;
 	private EnterSystem ES=null;
-
+	private JFrame frame = new JFrame();
 	private ConnectSql conector = null;
 	private Data d = null;
 
 	
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					new Login();
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
 	 */
 	public Login() {
-		super.getFrame().setVisible(true);
+		new FrameClock(frame);
+		frame.setVisible(true);
 		initialize();
 	}
 

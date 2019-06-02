@@ -17,11 +17,15 @@ public class FrameClock  {
 	protected JFrame frame;
 	
 	
+	public FrameClock() {
+
+	}
+	
 	/**
 	 * Create the frame.
 	*/ 
-	public FrameClock() {
-		frame = new JFrame();
+	public FrameClock(JFrame frame) {
+//		frame = new JFrame();
 		frame.setTitle("ניהול נוכחות");
 		//frame.setType(Type.UTILITY);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,13 +70,13 @@ public class FrameClock  {
 		}).start();
 	}
 	
-	public String getDate() {
+	public static String getDate() {
 		Date t = new Date();
 		Format formatter = new SimpleDateFormat("yyyyMMdd");
 		return formatter.format(t);
 	}
 	
-	public String getTime() {
+	public static String getTime() {
 		Date t = new Date();
 		Format formatter = new SimpleDateFormat("HHmmss");
 		return formatter.format(t);

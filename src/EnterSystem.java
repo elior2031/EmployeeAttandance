@@ -14,10 +14,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.Window;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class EnterSystem extends FrameClock {
+public class EnterSystem  {
 
 	//private JFrame frame;
 	
@@ -34,7 +35,7 @@ public class EnterSystem extends FrameClock {
 	private JLabel lblnote_1;
 	private JButton btnBack;
 	private Data d;
-
+	private JFrame frame = new JFrame();
 	/**
 	 * Launch the application.
 	 */
@@ -44,6 +45,7 @@ public class EnterSystem extends FrameClock {
 	 * Create the application.
 	 */
 	public EnterSystem() {
+		new FrameClock(frame);
 		initialize();
 	}
 
@@ -292,5 +294,9 @@ public class EnterSystem extends FrameClock {
 		lblbd.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblbd.setBounds(1195, 400, 83, 34);
 		frame.getContentPane().add(lblbd);
+	}
+
+	public JFrame getFrame() {
+		return frame;
 	}
 }

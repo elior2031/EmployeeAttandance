@@ -1,57 +1,57 @@
 
-
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Stack;
 import javax.swing.JFrame;
 
+public class Data {
 
-public class Data extends FrameClock{
-	
 	private static int ID;
 	private static String Pass;
-	private static Stack <JFrame> frames = new Stack();
+	private static Stack<JFrame> frames = new Stack();
 	private static ArrayList<TimeEmployee> Times = new ArrayList();
 	private TimeEmployee TE;
 
 	public int getID() {
 		return ID;
 	}
+
 	public void setID(int ID) {
-		this.ID =ID;
+		this.ID = ID;
 	}
-	
+
 	public String getPass() {
 		return Pass;
 	}
+
 	public void setPass(String pass) {
 		Pass = pass;
 	}
-	
+
 	public String getDate() {
-		return super.getDate();
-	}
-	
-	public String getTime() {
-		return super.getTime();
+		return FrameClock.getDate();
 	}
 
-	public void addFrame(JFrame frame)
-	{
+	public String getTime() {
+		return FrameClock.getTime();
+	}
+
+	public void addFrame(JFrame frame) {
 		frames.push(frame);
 	}
-	public JFrame getFrameLast()
-	{
+
+	public JFrame getFrameLast() {
 		setPass(null);
-		if(frames.isEmpty())
+		if (frames.isEmpty())
 			return null;
 		return frames.pop();
 	}
+
 	public void getTimeForUser() {
 		// TODO Auto-generated method stub
 		TimeEmployee t;
-		for(int i=0;i<Times.size();i++) {
+		for (int i = 0; i < Times.size(); i++) {
 			System.out.println(Times.get(i).getID());
 			System.out.println(Times.get(i).getTime());
 			System.out.println(Times.get(i).getDate());
@@ -60,9 +60,10 @@ public class Data extends FrameClock{
 
 		}
 	}
+
 	public void addTime(int ID, String date, String time, int mov) {
 		// TODO Auto-generated method stub
-		TE=new TimeEmployee();
+		TE = new TimeEmployee();
 		TE.setID(ID);
 		TE.setDate(date);
 		TE.setTime(time);
@@ -70,7 +71,4 @@ public class Data extends FrameClock{
 		Times.add(TE);
 	}
 
-	
-	
-	
 }

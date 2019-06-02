@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class EnterUser extends FrameClock{
+public class EnterUser {
 
 //	private JFrame frame;
 	JButton btnExit;
@@ -20,6 +20,7 @@ public class EnterUser extends FrameClock{
 	JButton btnBack;
 	Login login;
 	Data d;
+	private JFrame frame = new JFrame();
 	
 	
 	private ConnectSql conector = null;
@@ -34,7 +35,7 @@ public class EnterUser extends FrameClock{
 	 * @wbp.parser.entryPoint
 	 */
 	public EnterUser() {
-		super.getFrame().setVisible(true);
+		new FrameClock(frame);
 		initialize();
 	}
 
