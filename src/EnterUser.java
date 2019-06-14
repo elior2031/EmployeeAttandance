@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class EnterUser {
+	
 
 //	private JFrame frame;
 	JButton btnExit;
@@ -20,7 +21,7 @@ public class EnterUser {
 	JButton btnBack;
 	Login login;
 	Data d;
-	private JFrame frame = new JFrame();
+	public JFrame frame = new JFrame();
 	
 	
 	private ConnectSql conector = null;
@@ -38,11 +39,15 @@ public class EnterUser {
 		new FrameClock(frame);
 		initialize();
 	}
-
+	/*public EnterUser(JFrame frame) {
+		new FrameClock(frame);
+		initialize();
+	}*/
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public void initialize() {
 		/*frame = new JFrame();
 		frame.setBounds(270, 60, 1400, 900);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

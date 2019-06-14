@@ -70,6 +70,8 @@ import java.awt.Container;
 
 
 public class Login {
+	private Hr EnterHr =null;
+	private Manager EnterManager=null;
 
 	private JLabel lblEmp;
 	private JLabel lblPass;
@@ -194,10 +196,24 @@ public class Login {
 			break;
 		case 2:
 			JOptionPane.showMessageDialog(frame,"כניסה של מנהל", "שגיאה", 1);// 0-X 1-!
+		
+			EnterManager = new Manager();
+			EnterManager.getFrame().setVisible(true);
+			d= new Data();
+			d.addFrame(frame);
+			frame.setVisible(false);
 			break;
-		case 3:
+
+			case 3:
 			JOptionPane.showMessageDialog(frame,"כניסה של HR", "שגיאה", 0);// 0-X 1-!
+			EnterHr = new Hr();
+			EnterHr.getFrame().setVisible(true);
+			d= new Data();
+			d.addFrame(frame);
+			frame.setVisible(false);
 			break;
+
+			
 		case 4:
 			JOptionPane.showMessageDialog(frame,"כניסה של מנהל מערכת", "שגיאה", 1);// 0-X 1-!
 			ES = new EnterSystem();
