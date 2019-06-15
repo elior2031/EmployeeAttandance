@@ -21,7 +21,7 @@ public class EnterUser {
 	JButton btnBack;
 	Login login;
 	Data d;
-	public JFrame frame = new JFrame();
+	private JFrame frame = new JFrame();
 	
 	
 	private ConnectSql conector = null;

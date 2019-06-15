@@ -1,25 +1,18 @@
- 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.awt.event.KeyEvent;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 
-public class Hr extends EnterUser {
+public class Manager extends EnterUser {
 
-	  
+JFrame frame = super.getFrame();
 
-
-JFrame frame = new JFrame("HR");
-
-Hr()	
+Manager()	
 { 
     // creating instance of JFrame with name "first way" 
-	//HR frame;
-    frame=new JFrame("HR"); 
-    //get clock
-    new FrameClock(frame);
+
     // get EnterUser PAGE;
 				btnExit.setBounds(700, 100, 250, 100);
 				frame.getContentPane().add(btnExit);
@@ -32,8 +25,9 @@ Hr()
    
       
     // creates instance of JButton 
-    JButton button = new JButton("עדכון עובד"); 
+    JButton button = new JButton("ניהול עובדים"); 
     
+  
     button.setBounds(700, 400, 600, 100); 
     // setting close operation 
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
@@ -45,19 +39,14 @@ Hr()
     frame.getContentPane().setLayout(null); 
     // makes the frame visible 
     frame.setVisible(true); 
-    
-	
-}
 }
 
-  
-
-		
-		
-		
-		
 	
 
+}
 
-	
+
+
+
+
 

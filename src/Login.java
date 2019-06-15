@@ -70,7 +70,7 @@ import java.awt.Container;
 
 
 public class Login {
-	private Hr EnterHr =null;
+	private HR EnterHr =null;
 	private Manager EnterManager=null;
 
 	private JLabel lblEmp;
@@ -120,8 +120,7 @@ public class Login {
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(txtEmp);
 		txtEmp.setColumns(10);
-
-		txtPass = new JPasswordField();
+		txtPass = new JPasswordField(); 
 		txtPass.setFont(new Font("Tahoma", Font.BOLD, 18));
 		txtPass.setBounds(932, 300, 128, 33);
 		txtPass.addKeyListener(new KeyAdapter() {
@@ -206,7 +205,7 @@ public class Login {
 
 			case 3:
 			JOptionPane.showMessageDialog(frame,"כניסה של HR", "שגיאה", 0);// 0-X 1-!
-			EnterHr = new Hr();
+			EnterHr = new HR();
 			EnterHr.getFrame().setVisible(true);
 			d= new Data();
 			d.addFrame(frame);
